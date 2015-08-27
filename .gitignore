@@ -4,6 +4,9 @@
 # dist folder
 dist
 
+# test report
+test-report.txt
+
 # Object files
 *.o
 *.ko

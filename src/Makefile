@@ -1,7 +1,7 @@
 CC = gcc
 OBJS = JSON_checker.o
 DEPS = JSON_checker.h
-OUTLIB = JSON_checker.a
+OUTLIB = libJSON_checker.a
 
 all: $(OUTLIB)
 

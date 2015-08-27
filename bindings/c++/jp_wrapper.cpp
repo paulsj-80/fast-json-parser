@@ -4,6 +4,8 @@
 
 namespace jpw {
 
+    Listener::~Listener() {
+    }
 
     Parser::Parser(Listener& listener, unsigned int stackLen)
         : listener(listener) {
