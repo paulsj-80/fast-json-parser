@@ -1,3 +1,9 @@
+# emacs backups
+*~
+
+# dist folder
+dist
+
 # Object files
 *.o
 *.ko
