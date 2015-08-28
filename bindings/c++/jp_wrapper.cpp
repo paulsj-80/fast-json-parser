@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <sstream>
+#include <cstring>
 #include "jp_wrapper.h"
 
 namespace jpw {
@@ -15,8 +16,27 @@ namespace jpw {
                            (void*)this, 0);
     }
 
+    Parser::Parser(Parser const& other) : listener(listener) {
+        currBuff = other.currBuff;
+        
+        jc = other.jc;
+        jc.stack = new int[jc.depth];
+        memcpy(jc.stack, other.jc.stack, sizeof(int) * jc.depth);
+    }
+
+    Parser& Parser::operator=(const Parser& other) {
+        listener = other.listener;
+        currBuff = other.currBuff;
+        
+        delete [] jc.stack;
+        jc = other.jc;
+        jc.stack = new int[jc.depth];
+        memcpy(jc.stack, other.jc.stack, sizeof(int) * jc.depth);
+    }
+
+
     Parser::~Parser() {
-        delete jc.stack;
+        delete [] jc.stack;
     }
 
     void Parser::feed(char* buff, unsigned int len) {

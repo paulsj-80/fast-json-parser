@@ -27,6 +27,8 @@ namespace jpw {
         static int tokenHandler(void* ctx, int type, int pos, int size);
     public:
         Parser(Listener& listener, unsigned int stackLen);
+        Parser(Parser const& other);
+        Parser& operator=(const Parser& other);
         virtual ~Parser();
 
         // allows to reuse instance for multiple JSON "files"
