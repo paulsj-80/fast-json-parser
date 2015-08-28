@@ -39,6 +39,11 @@ namespace jpw {
         delete [] jc.stack;
     }
 
+    void Parser::setListener(Listener& listener) {
+        this->listener = listener;
+    }
+
+
     void Parser::feed(char* buff, unsigned int len) {
         currBuff = buff;
         for (int i = 0; i < len; i++)

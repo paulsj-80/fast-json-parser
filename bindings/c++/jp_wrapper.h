@@ -31,6 +31,8 @@ namespace jpw {
         Parser& operator=(const Parser& other);
         virtual ~Parser();
 
+        void setListener(Listener& listener);
+
         // allows to reuse instance for multiple JSON "files"
         void reset();
 
