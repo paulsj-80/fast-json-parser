@@ -55,7 +55,7 @@ void test_jp_wrapper() {
     stringstream ss;
     WrapperListener wl(ss);
 
-    jpw::Parser p(wl, 10);
+    jpw::Parser p(&wl, 10);
     p.feed(data, bytesRead);
     p.feeding_done();
 

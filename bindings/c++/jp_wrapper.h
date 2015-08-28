@@ -20,18 +20,18 @@ namespace jpw {
 
     class Parser {
     private:
-        Listener& listener;        
+        Listener* listener;        
         JSON_checker_struct jc;
         char* currBuff;
 
         static int tokenHandler(void* ctx, int type, int pos, int size);
     public:
-        Parser(Listener& listener, unsigned int stackLen);
+        Parser(Listener* listener, unsigned int stackLen);
         Parser(Parser const& other);
         Parser& operator=(const Parser& other);
         virtual ~Parser();
 
-        void setListener(Listener& listener);
+        void setListener(Listener* listener);
 
         // allows to reuse instance for multiple JSON "files"
         void reset();

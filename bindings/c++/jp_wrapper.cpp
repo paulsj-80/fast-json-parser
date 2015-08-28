@@ -8,7 +8,7 @@ namespace jpw {
     Listener::~Listener() {
     }
 
-    Parser::Parser(Listener& listener, unsigned int stackLen)
+    Parser::Parser(Listener* listener, unsigned int stackLen)
         : listener(listener) {
         jc.stack = new int[stackLen];
         jc.depth = stackLen;
@@ -16,7 +16,7 @@ namespace jpw {
                            (void*)this, 0);
     }
 
-    Parser::Parser(Parser const& other) : listener(listener) {
+    Parser::Parser(Parser const& other) : listener(other.listener) {
         currBuff = other.currBuff;
         
         jc = other.jc;
@@ -39,7 +39,7 @@ namespace jpw {
         delete [] jc.stack;
     }
 
-    void Parser::setListener(Listener& listener) {
+    void Parser::setListener(Listener* listener) {
         this->listener = listener;
     }
 
@@ -75,24 +75,24 @@ namespace jpw {
 
         switch (type) {
         case JSON_TOKEN_KEY:
-            instance->listener.handleKey(instance->currBuff + pos,
+            instance->listener->handleKey(instance->currBuff + pos,
                                          size);
             break;
         case JSON_TOKEN_VALUE:
-            instance->listener.handleValue(instance->currBuff + pos,
+            instance->listener->handleValue(instance->currBuff + pos,
                                            size);
             break;
         case JSON_TOKEN_OBJ_START:
-            instance->listener.handleObjStart();
+            instance->listener->handleObjStart();
             break;
         case JSON_TOKEN_OBJ_END:
-            instance->listener.handleObjEnd();
+            instance->listener->handleObjEnd();
             break;
         case JSON_TOKEN_ARR_START:
-            instance->listener.handleArrStart();
+            instance->listener->handleArrStart();
             break;
         case JSON_TOKEN_ARR_END:
-            instance->listener.handleArrEnd();
+            instance->listener->handleArrEnd();
             break;
         }
         return 0;
